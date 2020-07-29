@@ -20,34 +20,10 @@ var raw = `
   </body>
 </html>`
 
-func visit(n *html.Node, words, pics *int) {
-	// if it's a text node, get the space-delimited words;
-	// if it's an element node then see what tag it has
-
-	switch n.Type {
-	case html.TextNode:
-		if s := strings.TrimSpace(n.Data); len(s) > 0 {
-			*words += len(strings.Fields(s))
-		}
-
-	case html.ElementNode:
-		switch n.Data {
-		case "img":
-			*pics++
-		}
-	}
-
-	// then visit all the children using recursion
-
-	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		visit(c, words, pics)
-	}
-}
-
 func countWordsAndImages(doc *html.Node) (int, int) {
 	var words, pics int
 
-	visit(doc, &words, &pics)
+	// some code here
 
 	return words, pics
 }
